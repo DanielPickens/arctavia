@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: lab-app
+  name: webproxy-ingress-arctavia
+  labels:
+    app: arctavia
+spec:
+  type: ClusterIP
+  selector:
+    app: arctavia
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080

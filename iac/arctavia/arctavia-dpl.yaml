@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: lab-app
+  name: arctavia
+  labels:
+    app: arctavia
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: arctavia
+  template:
+    metadata:
+      labels:
+        app: arctavia
+    spec:
+      containers:
+        - name: arctavia
+          image: '${docker_image}'
+          imagePullPolicy: "IfNotPresent"
+          resources:
+            limits:
+              memory: 1Gi
+              cpu: 500m
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: postgres-db-config
